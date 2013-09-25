@@ -1,0 +1,85 @@
+<!doctype html>
+
+<head>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script> <!-- 1.7.2 -->
+  <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'></script>  <!-- 1.8.18 --> 
+  <script src='http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js'></script>
+  <!--<script src='http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js'></script>-->
+  
+<!-- dataTables.js stuff -->
+  <script src="{{ url_for('static', filename='js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/DT_bootstrap.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/TableTools.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/dataTables-sorting-plugins.js') }}"></script>
+
+  <script src="{{ url_for('static', filename='js/bddb.js') }}"></script>
+  <script src="{{ url_for('static',  filename='js/jquery.validate.js') }}"></script>
+  <script src="{{ url_for('static',  filename='js/jquery.validation.functions.js') }}"></script>
+
+  <!--<link rel='stylesheet' type='text/css' href='http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css'>
+  <link rel='stylesheet' type='text/css' href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css">
+  <link rel='stylesheet' type='text/css' href="http://bootswatch.com/united/bootstrap.min.css">-->
+
+ 
+  <script src='http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js'></script>
+  <link rel='stylesheet' type='text/css' href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+  <link rel='stylesheet' type='text/css' href="http://netdna.bootstrapcdn.com/bootswatch/2.2.1/united/bootstrap.min.css">
+  
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jQuery.dataTables.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/demo_table.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/DT_bootstrap.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/TableTools.css') }}">
+
+  {% block head %}
+  <title>{% block title %}{% endblock %} Broad Domain Database</title>
+  {% endblock %}
+
+</head>
+
+<body>
+
+<div class="container" id="banner">
+  <div class="span12 pagination-centered">
+    {% block header %}
+    <h1>Broad Domains DataBase</h1>
+    {% endblock %} <!-- end header block -->
+  </div>
+</div> <!-- end banner div -->
+
+<div id='container' class='span12 pagination-centered'>
+    <div class='navbar'>
+      <div class='navbar-inner'>
+	<ul class='nav'>
+	  <li class="active"><a href='/'>Home</a></li>
+	  <li><a href='/search'>Search</a></li>
+	  <li><a href='/upload'>Upload Data</a></li>
+	  <!--<li><a href='/download'>Download</a></li>-->
+	  <li><a href='/help'>Help</a></li>
+	  <li><a href='/contact'>Contact Us</a></li>
+	</ul>
+      </div> <!-- end navbar-inner -->
+    </div> <!-- end navbar -->
+	       
+    {% block content %}{% endblock %}
+  
+</div> 
+<!-- end content div -->
+<div class='span12'>
+	 {% block formcontent %}{% endblock %}
+</div> 
+	 
+<div id='footer' class='container-fluid'>
+
+  <div class="row-fluid">
+    <div class='span12 pagination-centered'>
+    {% block footer %}
+    &copy; Copyright 2013, <a href="http://www.stanford.edu/group/brunet/">Brunet Lab</a>
+ | About us | <a href="http://www.stanford.edu/site/terms.html">Site use</a>
+    {% endblock %} <!-- end footer block -->
+    </div> <!-- end span12 -->
+    </div> <!-- end row-fluid -->
+</div> <!-- end footer div -->
+
+</body>
+
+

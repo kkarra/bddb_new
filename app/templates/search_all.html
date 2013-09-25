@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>All Genes</h2>
+  <form action="" method=post>
+    <table>
+      <tr>
+        <th>Name
+      {% for g in genes %}
+      <tr class=title>
+        <td>Gene Name is: {{ g.symbol }}</td>
+      {% endfor %}
+    </table>
+  </form>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block formcontent %}
+<div class='span4'>
+<form action="" method="post" name="search">
+    {{form.hidden_tag()}}
+    <div> All fields are required </div>
+    <div> {{ form.name.label }} {{ form.name }} </div>
+    <div> {{ form.email.label }}  {{ form.email }}</div>
+    <div> {{ form.subject.label }}  {{ form.subject }}</div>   
+    <div> {{ form.fieldofinterest.label }}  {{ form.fieldofinterest }}</div> 
+    <div>  {{ form.affiliation.label }}  {{ form.affiliation }} </div> 
+    <div> {{ form.message.label }} {{ form.message }}  </div>	     
+    <button type="submit" class="btn" id='submitSearch'>Submit</button> 
+</form>   
+</div>
+
+{% endblock %}
+

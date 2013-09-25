@@ -1,0 +1,23 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block formcontent %}
+<div class='span4'>
+<form action="" method="post" name="search">
+    {{form.hidden_tag()}}
+    <div> {{ form.geneid.label }} {{form.geneid(size=80)}} </div>
+    <div> {{ form.speciesid.label }} {{ form.speciesid(rows=3, multiple=True) }}</div>
+    <div> {{ form.tissueid.label }} {{ form.tissueid(rows=3, multiple=True) }}</div>   
+    <div> {{ form.methodid.label }} {{ form.methodid(rows=3, multiple=True) }}</div>      
+    <button type="submit" class="btn" id='submitSearch'>Submit</button> 
+</form>   
+</div>
+
+<script>
+	
+//	$( "#submitSearch" ).click(function() {
+// 		 alert( "Handler for .click() called." );
+//});
+</script>
+
+{% endblock %}
