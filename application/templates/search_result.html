@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+  <b>Search Results:</b>
+  	<input type='hidden' id='id_list' value='{{ geneList }}'>
+  	<input type='hidden' id='method_list' value='{{ methods }}'>
+  	<input type='hidden' id='tissue_list' value='{{ tissues }}'>
+
+    <table id='groupTable'>
+    	<thead><tr><th>Gene name</th><th>Species</th><th>Breadth</th><th>Method</th><th>Tissue</th><th>Biosample</th></tr></thead>
+    </table>
+  
+<script>
+  	$(document).ready(function(){
+
+  		geneIds = $('#id_list').val();
+  		tissues = $('#tissue_list').val();
+  		methods = $('#method_list').val();
+ 		  		
+  		newGene = geneIds.replace("[","");
+  		geneIds = newGene.replace("]","");
+		newGene = geneIds.replace(/'/g,"");
+  		geneIds = newGene.replace(/, /g,"+");
+  		
+  		newTiss = tissues.replace("[","");
+  		tissues = newTiss.replace("]","");
+		newTiss = tissues.replace(/'/g,"");
+  		tissues = newTiss.replace(/, /g,"+");
+  		tissues = tissues.replace(/u/g,"");
+  		
+  		newMeth = methods.replace("[","");
+  		methods = newMeth.replace("]","");
+		newMeth = methods.replace(/'/g,"");
+  		methods = newMeth.replace(/, /g,"+");
+  		methods = methods.replace(/u/g, "");
+  		
+		console.log("gene ids: " + geneIds); // + "<br>searchtype:" + searchType)
+		console.log("tissues: " + tissues);
+		console.log("methods:" + methods);
+
+ 		source = "/_multi_peaks?gene_ids="+ geneIds;
+ 		if (methods != 'None') {
+ 				source = source + "&method_ids=" + methods;
+ 		}
+ 		if (tissues != 'None') {
+ 				source = source + '&tissue_ids=' + tissues;
+ 		}
+			
+ 		peakTable = $('#groupTable').dataTable(
+				{"bProcessing": true,
+				"sDom": 'T<"clear">lfrtip',
+				"sPaginationType": "bootstrap",
+								"oTableTools": {"sSwfPath": "static/swf/copy_csv_xls_pdf.swf",
+								"aButtons": ["copy",
+											"csv",
+											"pdf",
+											"print"]
+								},
+				"sAjaxSource" : source
+			});	
+  	});
+  	
+</script>
+{% endblock %}

@@ -1,0 +1,66 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block formcontent %}
+
+<div class="container-fluid">
+  <div class="row-fluid">
+
+  <div class="span5">{{ gene.symbol }} Gene Information</div>
+ <!-- <div class="span2 offset4"><button id='download' 
+				     class='btn btn-default'>Download</button></div> -->
+  </div> <!-- end row-fluid -->
+  <div class="row-fluid">
+    <div class="span3"><b>Species:</b></div>
+        <div>{{ gene.species.name }}</div>
+  </div> <!-- end species row -->
+  
+    {% if gene.description %}
+    	<div class="row-fluid">
+          <div class='span3'><b>Description:</b></div>
+          <div>{{ gene.description }}</div>
+	  </div> <!-- end description row -->
+     {% endif %}
+
+   {% if gene.homolog != 'None' %}
+    	<div class="row-fluid">
+          <div class='span3'><b>Homolog:</b></div>
+          <div>{{ gene.homolog }}</div>
+	  </div> <!-- end description row -->
+     {% endif %}
+
+<table id='breadthTable'><thead><tr><th>Breadth signal</th><th>Method</th>
+	<th>Tissue</th><th>Biosample</th></tr></thead></table>
+		<input type='hidden' id='peak_data' value= '{{ gene.entrez_gene_id }}'> <!-- hide json obj from app -->
+		<input type='hidden' id='tissues' value='{{ tissues }}'>
+		<input type='hidden' id='methods' value='{{ methods }}'
+	
+</div> <!-- end container-fluid -->
+
+<h1>{{ species }}</h1>
+<script>
+$(document).ready(function() {
+		var gene_id = $('#peak_data').val();
+		var t_id = $('#tissues').val();
+		var m_id = $('#methods').val();
+		
+		console.log('gene:' + gene_id + "tissues: " + t_id + "methods:" + m_id);
+		
+		peakTable = $('#breadthTable').dataTable(
+			{"bProcessing": true,			
+			"sDom": 'T<"clear">lfrtip',
+			"sPaginationType": "bootstrap",
+								"oTableTools": {"sSwfPath": "static/swf/copy_csv_xls_pdf.swf",
+								"aButtons": ["copy",
+											"csv",
+											"pdf",
+											"print"]
+								},
+			"sAjaxSource" : "/_peaks/"+ gene_id //+ "&methods=" + m_id + "&tissues=" + t_id
+		});
+
+});
+
+</script>
+{% endblock %}
+
